@@ -1,0 +1,68 @@
+<nav
+  class="navbar navbar-defaut navbar-expand-sm bg-light navbar-light fixed-top"
+>
+  <div class="container">
+    <a routerLink="/" class="navbar-brand h1 mb-0">Recipe Book</a>
+    <!-- <button class="navbar-toggler" (click)="navbarExpandHandler()">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+    <button class="navbar-toggler" [appDropdown]="navbarExpanded">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- <div
+      class="collapse navbar-collapse navigationbar"
+      [class.show]="isNavbarExpanded"
+    > -->
+    <div class="collapse navbar-collapse navigationbar" #navbarExpanded>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" *ngIf="isAuthenticated">
+          <a routerLink="/recipes" routerLinkActive="active" class="nav-link"
+            >Recipes</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated">
+          <a
+            routerLink="/shopping-list"
+            routerLinkActive="active"
+            class="nav-link"
+            >Shopping List</a
+          >
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item" *ngIf="(authState | async).authenticated">
+          <a style="cursor: pointer" class="nav-link" (click)="onLogout()"
+            >Logout</a
+          >
+        </li>
+        <ng-template [ngIf]="!(authState | async).authenticated">
+          <li class="nav-item">
+            <a routerLink="/signin" routerLinkActive="active" class="nav-link"
+              >SignIn</a
+            >
+          </li>
+          <li class="nav-item">
+            <a routerLink="/signup" routerLinkActive="active" class="nav-link"
+              >SignUp</a
+            >
+          </li>
+        </ng-template>
+        <!-- <li class="nav-item dropdown" [appDropdown]="drop">
+          <li
+          class="nav-item dropdown"
+          [class.show]="isDropdownExapanded"
+          (click)="dropdownExpandHandler()"
+        >
+          <a class="nav-link dropdown-toggle" role="button">
+            Manage
+          </a>
+          <div class="dropdown-menu" [class.show]="isDropdownExapanded">
+          <div class="dropdown-menu" #drop>
+            <span class="dropdown-item" (click)="saveData()">Save Data</span>
+            <span class="dropdown-item">Fetch Data</span>
+          </div>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+</nav>

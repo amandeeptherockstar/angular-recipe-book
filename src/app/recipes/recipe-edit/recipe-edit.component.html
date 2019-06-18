@@ -1,0 +1,179 @@
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-12">
+          <button
+            type="submit"
+            [disabled]="!recipeForm.valid"
+            class="btn btn-success mr-3"
+          >
+            {{ this.editMode ? 'Update' : 'Save' }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onCancelRecipeEdit()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="tbname">Name</label>
+            <input
+              type="text"
+              id="tbname"
+              class="form-control"
+              formControlName="name"
+              [class.is-invalid]="
+                getRecipeName.touched && getRecipeName.invalid
+              "
+            />
+            <div
+              *ngIf="getRecipeName.touched && !getRecipeName.valid"
+              class="invalid-feedback"
+            >
+              <span *ngIf="getRecipeName.errors['required']"
+                >Name is required</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="tbimagepath">Image Path</label>
+            <input
+              type="text"
+              id="tbimagepath"
+              class="form-control"
+              formControlName="imagePath"
+              [class.is-invalid]="
+                getRecipeImagePath.touched && getRecipeImagePath.invalid
+              "
+              #ImagePath
+            />
+            <div
+              *ngIf="getRecipeImagePath.touched && !getRecipeImagePath.valid"
+              class="invalid-feedback"
+            >
+              <span *ngIf="getRecipeImagePath.errors['required']"
+                >Image Path is required</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="tbimagepreview" style="display: block"
+              >Image Preview</label
+            >
+            <img
+              id="tbimagepreview"
+              [src]="recipe ? recipe.imagePath : ImagePath.value"
+              class="img-responsive"
+              style="max-width: 125px"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="tbdescription">Description</label>
+            <textarea
+              id="tbdescription"
+              class="form-control"
+              rows="6"
+              formControlName="description"
+              [class.is-invalid]="
+                getRecipeDescription.touched && getRecipeDescription.invalid
+              "
+            ></textarea>
+            <div
+              *ngIf="
+                getRecipeDescription.touched && !getRecipeDescription.valid
+              "
+              class="invalid-feedback"
+            >
+              <span *ngIf="getRecipeDescription.errors['required']"
+                >Description is required</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- array of controls containing recipes -->
+      <div class="row">
+        <div class="col-md-12">
+          <div
+            class="form-group d-flex align-items-center justify-content-between"
+          >
+            <label for="tbingredients">Ingredients</label>
+            <button
+              type="button"
+              (click)="addNewIngredient()"
+              class="btn btn-primary"
+            >
+              New
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row formArray" formArrayName="ingredients">
+        <div class="col-md-12 p-0">
+          <div
+            class="form-group d-flex justify-content-start"
+            *ngFor="
+              let ingred of recipeForm.get('ingredients').controls;
+              let i = index
+            "
+            [formGroupName]="i"
+          >
+            <div class="col-md-8">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="ingredientName"
+              />
+            </div>
+            <div class="col-md-2">
+              <input
+                type="number"
+                class="form-control"
+                formControlName="amount"
+              />
+            </div>
+            <div class="col-md-2 d-flex justify-content-end">
+              <input
+                type="button"
+                value="X"
+                class="btn btn-warning"
+                (click)="deleteIngredient(i)"
+              />
+              <!-- <input
+                type="button"
+                value="X"
+                class="btn btn-warning"
+                (click)="deleteIngredient(ingred.value.id)"
+              /> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div style="margin-bottom: 5rem;"></div>
+  </div>
+</div>

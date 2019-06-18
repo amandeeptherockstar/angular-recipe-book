@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm-12">
+    <button type="button" class="btn btn-success" (click)="newRecipe()">
+      New Recipe
+    </button>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-sm-12">
+    <ul class="list-group">
+      <app-recipe-item
+        *ngFor="let recipeItem of (recipesState | async).recipes"
+        [recipe]="recipeItem"
+      ></app-recipe-item>
+    </ul>
+  </div>
+</div>

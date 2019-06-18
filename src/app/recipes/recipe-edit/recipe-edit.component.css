@@ -1,0 +1,7 @@
+.invalid-feedback {
+  display: block;
+}
+
+.formArray input.ng-touched.ng-invalid {
+  border: 1px solid #dc3545;
+}

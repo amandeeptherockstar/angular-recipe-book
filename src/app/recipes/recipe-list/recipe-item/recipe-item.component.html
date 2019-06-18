@@ -1,0 +1,17 @@
+<li
+  class="list-group-item d-flex justify-content-between align-items-center"
+  [routerLink]="[recipe.recipeId]"
+  routerLinkActive="active"
+>
+  <div>
+    <h4>{{ recipe.name }}</h4>
+    <p>{{ recipe.description }}</p>
+  </div>
+  <div>
+    <img
+      [src]="recipe.imagePath"
+      style="max-width: 50px"
+      alt="{{ recipe.name }}"
+    />
+  </div>
+</li>

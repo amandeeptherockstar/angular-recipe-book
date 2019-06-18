@@ -1,0 +1,62 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <div class="row mt-5">
+      <div class="col-md-6 mx-auto">
+        <h3 class="text-center">SignIn</h3>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="someone@domain.com"
+            class="form-control"
+            ngModel
+            #Email="ngModel"
+          />
+          <div
+            class="invalid-feedback"
+            [style.display]="Email.touched && Email.invalid ? 'block' : 'none'"
+          >
+            <span *ngIf="Email.errors?.usernotfound">{{
+              Email.errors?.usernotfound
+            }}</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter Password"
+            class="form-control"
+            ngModel
+            #Password="ngModel"
+            required
+          />
+          <div
+            class="invalid-feedback"
+            [style.display]="
+              Password.touched && Password.invalid ? 'block' : 'none'
+            "
+          >
+            <span *ngIf="Password.errors?.wrongpassword">{{
+              Password.errors?.wrongpassword
+            }}</span>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+          Submit
+        </button>
+        <br />
+        <div class="mt-2">
+          Do not have account?
+          <a [routerLink]="['/signup']" routerLinkActive="router-link-active">
+            Register Now!</a
+          >
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

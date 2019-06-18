@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-sm-10">
+    <app-shopping-edit></app-shopping-edit>
+    <hr />
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let ingredient of (shoppingListState | async).ingredients"
+        (click)="selectIngredient(ingredient.id)"
+      >
+        {{ ingredient.name }} ({{ ingredient.amount }})
+      </li>
+    </ul>
+  </div>
+
+  <div style="min-height: 300px"></div>
+</div>
